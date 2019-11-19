@@ -2,22 +2,21 @@ package com.lprakashv
 
 object StringUtils {
   private def transformWord(word: String,
-                            positionList: List[Int],
+                            positionList: Set[Int],
                             placeOnPosition: Char => String
                            ): String = {
-    word.foldLeft((0, positionList, List.empty[String])) {
-      case ((index, Nil, acc), c) => (index + 1, Nil, c.toString :: acc)
-      case ((index, ph :: pt, acc), c) if index == ph => (index + 1, pt, placeOnPosition(c) :: acc)
-      case ((index, p, acc), c) => (index + 1, p, c.toString :: acc)
-    }._3.reverse.mkString
+    word.zipWithIndex.collect {
+      case (c, i) if positionList.contains(i) => placeOnPosition(c)
+      case (c, _) => c.toString
+    }.mkString
   }
 
   def camelCasedWord(word: String,
                      startsWithCapital: Boolean = false,
-                     positions: Option[List[Int]] = None): Either[String, String] = {
+                     positions: Option[Set[Int]] = None): Either[String, String] = {
     if (word.contains(" ")) Left("CONTAINS_SPACE")
     else {
-      Right(positions.map(_.sorted) match {
+      Right(positions match {
         case Some(positionsList: List[Int]) =>
           transformWord(word.toLowerCase, positionsList, _.toUpper.toString)
         case None =>
@@ -35,10 +34,10 @@ object StringUtils {
 
   def underscoredWord(word: String,
                       symbol: String = "_",
-                      positions: Option[List[Int]] = None): Either[String, String] = {
+                      positions: Option[Set[Int]] = None): Either[String, String] = {
     if (word.contains(" ")) Left("CONTAINS_SPACE")
     else {
-      Right(positions.map(_.sorted) match {
+      Right(positions match {
         case Some(positionsList: List[Int]) =>
           transformWord(word.toLowerCase, positionsList, c => s"_$c")
 
