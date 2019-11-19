@@ -39,7 +39,7 @@ object StringUtils {
     else {
       Right(positions match {
         case Some(positionsList: List[Int]) =>
-          transformWord(word.toLowerCase, positionsList, c => s"_$c")
+          transformWord(word.toLowerCase, positionsList, c => s"$symbol$c")
 
         case None =>
           val l = word.map {
