@@ -1,6 +1,17 @@
 package com.lprakashv
 
 object StringUtils {
+  private def transformWord(word: String,
+                            positionList: List[Int],
+                            placeOnPosition: Char => String
+                           ): String = {
+    word.foldLeft((0, positionList, List.empty[String])) {
+      case ((index, Nil, acc), c) => (index + 1, Nil, c.toString :: acc)
+      case ((index, ph :: pt, acc), c) if index == ph => (index + 1, pt, placeOnPosition(c) :: acc)
+      case ((index, p, acc), c) => (index + 1, p, c.toString :: acc)
+    }._3.reverse.mkString
+  }
+
   def camelCasedWord(word: String,
                      startsWithCapital: Boolean = false,
                      positions: Option[List[Int]] = None): Either[String, String] = {
@@ -8,11 +19,7 @@ object StringUtils {
     else {
       Right(positions.map(_.sorted) match {
         case Some(positionsList: List[Int]) =>
-          word.toLowerCase.foldLeft((0, positionsList, List.empty[String])) {
-            case ((index, Nil, acc), c) => (index + 1, Nil, c.toString :: acc)
-            case ((index, ph :: pt, acc), c) if index == ph => (index + 1, pt, c.toUpper.toString :: acc)
-            case ((index, p, acc), c) => (index + 1, p, c.toString :: acc)
-          }._3.reverse.mkString
+          transformWord(word.toLowerCase, positionsList, _.toUpper.toString)
         case None =>
           word.toLowerCase.foldLeft(List.empty[String], false: Boolean) {
             case ((acc: List[String], capNext: Boolean), c: Char) =>
@@ -33,11 +40,7 @@ object StringUtils {
     else {
       Right(positions.map(_.sorted) match {
         case Some(positionsList: List[Int]) =>
-          word.foldLeft((0, positionsList, List.empty[String])) {
-            case ((index, Nil, acc), c) => (index + 1, Nil, c.toString :: acc)
-            case ((index, ph :: pt, acc), c) if index == ph => (index + 1, pt, s"$symbol$c" :: acc)
-            case ((index, p, acc), c) => (index + 1, p, c.toString :: acc)
-          }._3.reverse.mkString
+          transformWord(word.toLowerCase, positionsList, c => s"_$c")
 
         case None =>
           val l = word.map {
