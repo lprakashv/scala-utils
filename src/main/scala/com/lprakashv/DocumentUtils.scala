@@ -53,4 +53,24 @@ object DocumentUtils {
 
     transformDocumentKeys(sourcePath, destPath, ":", camelCasedWord(_, startsWithCapital))
   }
+
+  def jsonPrettyString(obj: Any,
+                       currentLevel: Int = 0,
+                       tabLength: Int = 1): String = {
+    obj match {
+      case l: Int => s"$l"
+      case l: Long => s"$l"
+      case str: String => s""""$str""""
+      case m: Map[String, Any] =>
+        "{\n" +
+          m.map {
+            case (k, s: Any) => (" " * tabLength * (currentLevel + 2)) + s""""$k": ${jsonPrettyString(s, currentLevel + 4)}"""
+          }.mkString(",\n") +
+          "\n" + (" " * tabLength * currentLevel) + "}"
+      case s: Seq[Any] => "[\n" + s.map{case a: Any => (" " * tabLength * (currentLevel + 2)) + jsonPrettyString(a, currentLevel + 4)
+      }.mkString(",\n") +
+        "\n" + (" " * tabLength * currentLevel) + "]"
+      case _ => ""
+    }
+  }
 }
