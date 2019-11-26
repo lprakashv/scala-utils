@@ -2,4 +2,6 @@
 project/target/
 target/
 *.iml
-
+.metals/
+.bloop/
+project/.bloop/

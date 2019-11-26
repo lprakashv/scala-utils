@@ -17,7 +17,7 @@ object StringUtils {
     if (word.contains(" ")) Left("CONTAINS_SPACE")
     else {
       Right(positions match {
-        case Some(positionsList: List[Int]) =>
+        case Some(positionsList: Set[Int]) =>
           transformWord(word.toLowerCase, positionsList, _.toUpper.toString)
         case None =>
           word.toLowerCase.foldLeft(List.empty[String], false: Boolean) {
@@ -38,7 +38,7 @@ object StringUtils {
     if (word.contains(" ")) Left("CONTAINS_SPACE")
     else {
       Right(positions match {
-        case Some(positionsList: List[Int]) =>
+        case Some(positionsList: Set[Int]) =>
           transformWord(word.toLowerCase, positionsList, c => s"$symbol$c")
 
         case None =>

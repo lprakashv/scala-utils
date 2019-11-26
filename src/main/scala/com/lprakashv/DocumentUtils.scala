@@ -64,7 +64,7 @@ object DocumentUtils {
       case m: Map[String, Any] =>
         "{\n" +
           m.map {
-            case (k, s: Any) => (" " * tabLength * (currentLevel + 2)) + s""""$k": ${jsonPrettyString(s, currentLevel + 4)}"""
+            case (k: String, s: Any) => (" " * tabLength * (currentLevel + 2)) + s""""$k": ${jsonPrettyString(s, currentLevel + 4)}"""
           }.mkString(",\n") +
           "\n" + (" " * tabLength * currentLevel) + "}"
       case s: Seq[Any] => "[\n" + s.map { a: Any => (" " * tabLength * (currentLevel + 2)) + jsonPrettyString(a, currentLevel + 4) }.mkString(",\n") +
