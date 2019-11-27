@@ -57,18 +57,21 @@ object DocumentUtils {
   def jsonPrettyString(obj: Any,
                        currentLevel: Int = 0,
                        tabLength: Int = 1): String = {
+    val currentTab: String = " " * tabLength * currentLevel
+    val nextTab: String = " " * tabLength * (currentLevel + 2)
+
     obj match {
       case l: Int => s"$l"
       case l: Long => s"$l"
       case str: String => s""""$str""""
       case m: Map[String, Any] =>
-        "{\n" +
-          m.map {
-            case (k: String, s: Any) => (" " * tabLength * (currentLevel + 2)) + s""""$k": ${jsonPrettyString(s, currentLevel + 4)}"""
-          }.mkString(",\n") +
-          "\n" + (" " * tabLength * currentLevel) + "}"
-      case s: Seq[Any] => "[\n" + s.map { a: Any => (" " * tabLength * (currentLevel + 2)) + jsonPrettyString(a, currentLevel + 4) }.mkString(",\n") +
-        "\n" + (" " * tabLength * currentLevel) + "]"
+        m.map {
+          case (k: String, s: Any) => s"""$nextTab"$k": ${jsonPrettyString(s, currentLevel + 4)}"""
+        }.mkString("{\n", ",\n", s"\n$currentTab}")
+      case s: Seq[Any] =>
+        s.map { a: Any =>
+          s"$nextTab${jsonPrettyString(a, currentLevel + 4)}"
+        }.mkString("[\n", ",\n", s"\n$currentTab]")
       case _ => ""
     }
   }
