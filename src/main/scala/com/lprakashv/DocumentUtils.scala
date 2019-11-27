@@ -72,7 +72,7 @@ object DocumentUtils {
         s.map { a: Any =>
           s"$nextTab${jsonPrettyString(a, currentLevel + 4)}"
         }.mkString("[\n", ",\n", s"\n$currentTab]")
-      case _ => ""
+      case unknown => throw new Exception(s"Unrecognized element: $unknown")
     }
   }
 }
