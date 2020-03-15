@@ -1,5 +1,4 @@
 [![Build Status](https://travis-ci.org/lprakashv/scala-utils.svg?branch=master&&style=flat-square)](https://travis-ci.org/lprakashv/scala-utils)
-<img src="https://travis-ci.org/lprakashv/scala-utils.svg?branch=master" alt="build:passed">
 
 # scala-utils
 Utilities for Scala
