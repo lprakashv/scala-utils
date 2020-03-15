@@ -1,4 +1,5 @@
-[![Actions Status](https://xxx.execute-api.us-west-2.amazonaws.com/production/badge/lprakashv/scala-utils)](https://xxx.execute-api.us-west-2.amazonaws.com/production/results/lprakashv/scala-utils)
+[![Build Status](https://travis-ci.org/lprakashv/scala-utils.svg?branch=master&&style=flat-square)](https://travis-ci.org/lprakashv/scala-utils)
+<img src="https://travis-ci.org/lprakashv/scala-utils.svg?branch=master" alt="build:passed">
 
 # scala-utils
 Utilities for Scala
