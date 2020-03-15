@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/lprakashv/scala-utils.svg?branch=master&&style=flat-square)](https://travis-ci.org/lprakashv/scala-utils)
+[![Coverage Status](https://coveralls.io/repos/github/lprakashv/scala-utils/badge.svg?branch=master)](https://coveralls.io/github/lprakashv/scala-utils?branch=master)
 
 # scala-utils
 Utilities for Scala
