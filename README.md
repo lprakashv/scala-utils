@@ -1,3 +1,5 @@
+[![Actions Status](https://xxx.execute-api.us-west-2.amazonaws.com/production/badge/lprakashv/scala-utils)](https://xxx.execute-api.us-west-2.amazonaws.com/production/results/lprakashv/scala-utils)
+
 # scala-utils
 Utilities for Scala
 
