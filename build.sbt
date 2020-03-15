@@ -1,5 +1,3 @@
-import scala.reflect.io.File
-
 name := "scala-utils"
 
 version := "0.1"
