@@ -12,8 +12,8 @@ import scala.concurrent.duration._
 
 class CircuitTest extends FunSuite {
 
-  test("test successes") {
-    val sampleCircuit =
+  test("test successes with CircuitImplicits") {
+    implicit val sampleCircuit =
       new Circuit[Int]("sample-circuit", 5, 5.seconds, 1, -1, println)
 
     val resultsF = Future.sequence(
@@ -21,6 +21,10 @@ class CircuitTest extends FunSuite {
     )
 
     val results = Await.result(resultsF, 10.minutes).toList
+
+    import CircuitImplicits._
+
+    (1 * 34 / 3).execute
 
     assert(results.count {
       case CircuitSuccess(4) => true

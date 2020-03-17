@@ -43,6 +43,8 @@ class Circuit[R](
       10L
     )
 
+  def getState: CircuitState = state.get()
+
   private def openCircuit: Unit = synchronized {
     circuitLogger("Opening circuit...")
     state.set(Open)
