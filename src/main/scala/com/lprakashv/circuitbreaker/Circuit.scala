@@ -18,7 +18,7 @@ class Circuit[R](name: String,
                  private final val timeout: Duration,
                  private final val maxAllowedHalfOpen: Int,
                  defaultAction: => R) /*(implicit ec: ExecutionContext)*/ {
-  private val failureCount = new AtomicInteger(0)
+  private var failureCount = 0
   private val lastOpenTime = new AtomicLong(Long.MaxValue)
   private val state = new AtomicReference[CircuitState](CircuitState.Closed)
   private val atomicMaxAllowedHalfOpen = new AtomicInteger(maxAllowedHalfOpen)
@@ -52,22 +52,24 @@ class Circuit[R](name: String,
   private def handleClosed(block: => R): CircuitResult[R] = {
     def normalClosedFlow: CircuitResult[R] = Try(block) match {
       case Success(value) =>
-        failureCount.set(0)
+        failureCount = 0
         CircuitSuccess(value)
       case Failure(exception) =>
-        failureCount.incrementAndGet()
+        failureCount += 1
         CircuitFailure[R](exception)
     }
-
-    semaphore.acquire(1 + failureCount.get()) // reason
-    val permitted = 1 + failureCount.get()
-    val result = if (failureCount.get() < threshold) {
-      normalClosedFlow
-    } else {
-      openCircuit
-      execute(block)
+    val result = synchronized {
+      if (failureCount > 0) {
+        synchronized {
+          if (failureCount < threshold) {
+            normalClosedFlow
+          } else {
+            openCircuit
+            execute(block)
+          }
+        }
+      } else normalClosedFlow
     }
-    semaphore.release(permitted)
     result
   }
 
