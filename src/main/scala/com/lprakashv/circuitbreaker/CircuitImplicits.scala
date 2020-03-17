@@ -1,10 +1,5 @@
 package com.lprakashv.circuitbreaker
 
-import com.lprakashv.circuitbreaker.CircuitResult.{
-  CircuitFailure,
-  CircuitSuccess
-}
-
 import scala.concurrent.{ExecutionContext, Future}
 
 object CircuitImplicits {
@@ -13,12 +8,5 @@ object CircuitImplicits {
 
     def executeAsync(implicit ex: ExecutionContext): Future[CircuitResult[R]] =
       Future { c.execute(block) }
-  }
-
-  implicit class CircuitResultExtensions[R](circuitResult: CircuitResult[R]) {
-    def toEither: Either[Throwable, R] = circuitResult match {
-      case CircuitSuccess(value: R)  => Right(value)
-      case CircuitFailure(exception) => Left(exception)
-    }
   }
 }
