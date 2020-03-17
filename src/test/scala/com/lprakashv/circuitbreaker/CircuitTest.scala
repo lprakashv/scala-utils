@@ -91,8 +91,8 @@ class CircuitTest extends FunSuite {
 
     assert(
       results.count {
-        case CircuitSuccess(_) => true
-        case _                 => false
+        case CircuitSuccess(-1) => true
+        case _                  => false
       } == 5,
       "failed to verify - 5 failures and 5 successes for 10 invalid executions"
     )

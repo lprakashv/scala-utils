@@ -29,6 +29,7 @@ class Circuit[R](name: String,
           case Open
               if (System
                 .currentTimeMillis() - lastOpenTime.get() > timeout.toMillis) =>
+            atomicMaxAllowedHalfOpen.set(maxAllowedHalfOpen)
             state.set(HalfOpen)
           case _ => ()
         }
