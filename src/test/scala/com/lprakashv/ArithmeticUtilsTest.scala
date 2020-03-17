@@ -8,7 +8,7 @@ class ArithmeticUtilsTest extends FunSuite {
     assert(1.0 / 3 ~= 0.333)
   }
 
-  test("PI == 0.33 with 0.0001 precision") {
+  test("PI != 0.33 with 0.0001 precision") {
     import com.lprakashv.commons.ArithmeticUtils._
     assert(!(math.Pi ~= (3.1, 0.0001)))
   }
