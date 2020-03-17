@@ -65,7 +65,7 @@ class Circuit[R](name: String,
       normalClosedFlow
     } else {
       openCircuit
-      CircuitSuccess(defaultAction)
+      execute(block)
     }
     semaphore.release(permitted)
     result
