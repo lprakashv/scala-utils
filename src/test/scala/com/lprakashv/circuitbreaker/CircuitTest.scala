@@ -14,7 +14,7 @@ class CircuitTest extends FunSuite {
 
   test("test successes") {
     val sampleCircuit =
-      new Circuit[Int]("sample-circuit", 5, 5.seconds, 1, -1)
+      new Circuit[Int]("sample-circuit", 5, 5.seconds, 1, -1, println)
 
     val resultsF = Future.sequence(
       (1 to 500).map(_ => Future { sampleCircuit.execute(2 + 2) })
@@ -33,7 +33,7 @@ class CircuitTest extends FunSuite {
       "failures 5 times"
   ) {
     val sampleCircuit =
-      new Circuit[Int]("sample-circuit", 5, 5.seconds, 1, -1)
+      new Circuit[Int]("sample-circuit", 5, 5.seconds, 1, -1, println)
 
     val resultsF = Future.sequence(
       for {
@@ -59,7 +59,7 @@ class CircuitTest extends FunSuite {
       "success with default answer after failure 5 times"
   ) {
     val sampleCircuit =
-      new Circuit[Int]("sample-circuit", 5, 5.seconds, 1, -1)
+      new Circuit[Int]("sample-circuit", 5, 5.seconds, 1, -1, println)
 
     val resultsF = Future.sequence(
       (1 to 12).map(_ => Future { sampleCircuit.execute(1 / 0) })
@@ -81,7 +81,7 @@ class CircuitTest extends FunSuite {
       "failure 5 times and then successes then failure after timeout (5 sec) and then successes again"
   ) {
     val sampleCircuit =
-      new Circuit[Int]("sample-circuit", 5, 5.seconds, 1, -1)
+      new Circuit[Int]("sample-circuit", 5, 5.seconds, 1, -1, println)
 
     // 5 failures and then 5 successes
     val resultsF = Future.sequence(
@@ -112,7 +112,7 @@ class CircuitTest extends FunSuite {
       "failed to verify success showing open (default case) after half-open failure"
     )
 
-    Thread.sleep(5100)
+    Thread.sleep(5200)
 
     val resultsF2 = Future.sequence(
       (1 to 5).map(_ => Future { sampleCircuit.execute(7 * 7) })
@@ -132,15 +132,19 @@ class CircuitTest extends FunSuite {
     "failure 5 times and then default successes even after having valid execution"
   ) {
     val sampleCircuit =
-      new Circuit[Int]("sample-circuit", 5, 5.seconds, 1, -1)
+      new Circuit[Int]("sample-circuit", 5, 5.seconds, 1, -1, println)
 
-    // 5 failures and then 5 successes
     Await.result(
       Future.sequence(
         (1 to 5).map(_ => Future { sampleCircuit.execute(1 / 0) })
       ),
       10.minutes
     )
+
+    assert(sampleCircuit.execute(1 / 0) match {
+      case CircuitSuccess(-1) => true
+      case _                  => false
+    }, "failed to validate circuit failure after reaching failure threshold")
 
     val resultsF = Future.sequence(
       (1 to 5).map(_ => Future { sampleCircuit.execute(7 * 7) })
