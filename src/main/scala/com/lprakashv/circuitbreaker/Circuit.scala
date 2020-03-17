@@ -45,14 +45,14 @@ class Circuit[R](
 
   def getState: CircuitState = state.get()
 
-  private def openCircuit: Unit = synchronized {
+  private def openCircuit: Unit = {
     circuitLogger("Opening circuit...")
     state.set(Open)
     lastOpenTime.set(System.currentTimeMillis())
     circuitLogger("Circuit is open.")
   }
 
-  private def closeCircuit: Unit = synchronized {
+  private def closeCircuit: Unit = {
     circuitLogger("Closing circuit...")
     state.set(Closed)
     lastOpenTime.set(Long.MaxValue)
@@ -60,7 +60,7 @@ class Circuit[R](
     circuitLogger("Circuit is closed.")
   }
 
-  private def halfOpenCircuit: Unit = synchronized {
+  private def halfOpenCircuit: Unit = {
     circuitLogger("Half-opening circuit...")
     state.set(HalfOpen)
     halfOpenConsecutiveFailuresCount.set(0)
