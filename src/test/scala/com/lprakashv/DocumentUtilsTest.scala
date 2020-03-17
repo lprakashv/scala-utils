@@ -1,5 +1,6 @@
 package com.lprakashv
 
+import com.lprakashv.files.DocumentUtils
 import org.scalatest.{FunSpec, FunSuite}
 
 import scala.util.Try

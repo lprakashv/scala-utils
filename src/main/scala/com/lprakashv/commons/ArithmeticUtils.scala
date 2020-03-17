@@ -1,4 +1,4 @@
-package com.lprakashv
+package com.lprakashv.commons
 
 import scala.math.BigDecimal
 

@@ -1,6 +1,6 @@
 package com.lprakashv.collections
 
-import com.lprakashv.FileUtils
+import com.lprakashv.files.FileUtils
 import org.scalatest.FunSpec
 
 class MyTrieTest extends FunSpec {

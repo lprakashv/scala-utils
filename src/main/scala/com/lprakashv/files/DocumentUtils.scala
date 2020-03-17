@@ -1,4 +1,4 @@
-package com.lprakashv
+package com.lprakashv.files
 
 import java.io.BufferedWriter
 
@@ -9,7 +9,7 @@ object DocumentUtils {
     kvSeparator: String,
     wordTransformer: String => Either[String, String]
   ): Unit = {
-    import FileUtils._
+    import com.lprakashv.files.FileUtils._
 
     implicit val writer: BufferedWriter = writerOfPath(destPath)
     val inReader = readerOfPath(sourcePath)
@@ -45,7 +45,7 @@ object DocumentUtils {
                             destPath: String,
                             kvSeparator: String,
                             snakeSymbol: String = "_"): Unit = {
-    import StringUtils._
+    import com.lprakashv.strings.StringUtils._
 
     transformDocumentKeys(
       sourcePath,
@@ -59,7 +59,7 @@ object DocumentUtils {
                             destPath: String,
                             kvSeparator: String,
                             startsWithCapital: Boolean = false): Unit = {
-    import StringUtils._
+    import com.lprakashv.strings.StringUtils._
 
     transformDocumentKeys(
       sourcePath,

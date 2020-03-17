@@ -1,4 +1,4 @@
-package com.lprakashv
+package com.lprakashv.files
 
 import java.io.{BufferedWriter, File, FileWriter}
 
@@ -9,8 +9,7 @@ object FileUtils {
     new BufferedWriter(new FileWriter(new File(ofPath)))
   }
 
-  def writeLine(line: String)
-               (implicit bw: BufferedWriter): Unit = {
+  def writeLine(line: String)(implicit bw: BufferedWriter): Unit = {
     bw.write(s"$line\n")
   }
 

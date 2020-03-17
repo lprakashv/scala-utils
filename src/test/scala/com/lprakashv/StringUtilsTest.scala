@@ -1,5 +1,6 @@
 package com.lprakashv
 
+import com.lprakashv.strings.StringUtils
 import org.scalatest.FunSuite
 
 class StringUtilsTest extends FunSuite {

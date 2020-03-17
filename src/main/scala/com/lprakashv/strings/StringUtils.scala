@@ -1,4 +1,4 @@
-package com.lprakashv
+package com.lprakashv.strings
 
 object StringUtils {
   private def transformWord(word: String,
