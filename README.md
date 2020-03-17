@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/lprakashv/scala-utils.svg?branch=master&&style=flat-square)](https://travis-ci.org/lprakashv/scala-utils)
+[![Build Status](https://travis-ci.org/lprakashv/scala-utils.svg?branch=master&style=flat-square)](https://travis-ci.org/lprakashv/scala-utils?branch=master)
 [![Coverage Status](https://coveralls.io/repos/github/lprakashv/scala-utils/badge.svg?branch=master)](https://coveralls.io/github/lprakashv/scala-utils?branch=master)
 ![Scala CI](https://github.com/lprakashv/scala-utils/workflows/Scala%20CI/badge.svg)
 
