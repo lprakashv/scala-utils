@@ -3,6 +3,10 @@ package com.lprakashv.resiliency
 import java.util.concurrent.atomic.{AtomicInteger, AtomicLong, AtomicReference}
 import java.util.{Date, Timer, TimerTask}
 
+import com.lprakashv.resiliency.Circuit.InvalidEvalCircuitException
+import com.lprakashv.resiliency.CircuitResult.{CircuitFailure, CircuitSuccess}
+import com.lprakashv.resiliency.CircuitState.{Closed, HalfOpen, Open}
+
 import scala.concurrent.duration._
 import scala.concurrent.{ExecutionContext, Future}
 import scala.util.{Failure, Success, Try}

@@ -1,6 +1,5 @@
 package com.lprakashv.resiliency
 
-import com.lprakashv.resiliency.{Circuit, CircuitResult}
 import org.scalatest.FunSuite
 
 import scala.concurrent.ExecutionContext.Implicits.global

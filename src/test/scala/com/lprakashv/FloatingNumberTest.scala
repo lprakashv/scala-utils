@@ -22,4 +22,9 @@ class FloatingNumberTest extends FunSuite {
     import com.lprakashv.commons.FloatingNumber.Implicits._
     assert(math.Pi.floatValue() ~= (3.1f, 0.1))
   }
+
+  test("1.1 != \"anything\"") {
+    import com.lprakashv.commons.FloatingNumber.Implicits._
+    assert(!(1.1 ~= ("anything", 0.1)))
+  }
 }

@@ -1,5 +1,7 @@
 package com.lprakashv.resiliency
 
+import com.lprakashv.resiliency.CircuitResult.CircuitSuccess
+
 trait CircuitResult[T] extends IterableOnce[T] with Product with Serializable {
   def isFailed: Boolean = this.toOption.isEmpty
 
@@ -8,11 +10,6 @@ trait CircuitResult[T] extends IterableOnce[T] with Product with Serializable {
   def toOption: Option[T] = this match {
     case CircuitSuccess(value) => Some(value)
     case _                     => None
-  }
-
-  def toEither: Either[Throwable, T] = this match {
-    case CircuitSuccess(value: T)  => Right(value)
-    case CircuitFailure(exception) => Left(exception)
   }
 }
 
