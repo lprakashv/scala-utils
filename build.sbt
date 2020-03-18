@@ -6,7 +6,7 @@ scalaVersion := "2.13.1"
 
 libraryDependencies += "org.scalatest" %% "scalatest" % "3.0.8" % "test"
 
-coverageMinimum := 80
+coverageMinimum := 70
 coverageFailOnMinimum := true
 coverageEnabled := true
 

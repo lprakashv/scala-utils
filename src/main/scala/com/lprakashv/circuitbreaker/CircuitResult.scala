@@ -5,15 +5,14 @@ import com.lprakashv.circuitbreaker.CircuitResult.{
   CircuitSuccess
 }
 
-trait CircuitResult[T] {
-  def getOrElse(f: T): T = this match {
-    case CircuitSuccess(value) => value
-    case CircuitFailure(_)     => f
-  }
+trait CircuitResult[T] extends IterableOnce[T] with Product with Serializable {
+  def isFailed: Boolean = this.toOption.isEmpty
 
-  def map[R](f: T => R): Option[R] = this match {
-    case CircuitSuccess(value) => Some(f(value))
-    case CircuitFailure(_)     => None
+  def isSuccess: Boolean = this.toOption.isDefined
+
+  def toOption: Option[T] = this match {
+    case CircuitSuccess(value) => Some(value)
+    case _                     => None
   }
 
   def toEither: Either[Throwable, T] = this match {
@@ -23,6 +22,10 @@ trait CircuitResult[T] {
 }
 
 object CircuitResult {
-  case class CircuitSuccess[T](value: T) extends CircuitResult[T]
-  case class CircuitFailure[T](exception: Throwable) extends CircuitResult[T]
+  case class CircuitSuccess[T](value: T) extends CircuitResult[T] {
+    override def iterator: Iterator[T] = Iterator.apply(value)
+  }
+  case class CircuitFailure[T](exception: Throwable) extends CircuitResult[T] {
+    override def iterator: Iterator[T] = Iterator.empty[T]
+  }
 }

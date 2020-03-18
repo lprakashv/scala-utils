@@ -9,4 +9,12 @@ object CircuitImplicits {
     def executeAsync(implicit ex: ExecutionContext): Future[CircuitResult[R]] =
       Future { c.execute(block) }
   }
+
+  implicit class AsyncBlockExtensions[R](block: => Future[R])(
+    implicit c: Circuit[R]
+  ) {
+
+    def executeAsync(implicit ex: ExecutionContext): Future[CircuitResult[R]] =
+      c.executeAsync(block)
+  }
 }
