@@ -1,5 +1,6 @@
-package com.lprakashv.circuitbreaker
+package com.lprakashv.resiliency
 
+import com.lprakashv.resiliency.{Circuit, CircuitResult}
 import org.scalatest.FunSuite
 
 import scala.concurrent.ExecutionContext.Implicits.global
@@ -11,7 +12,7 @@ class CircuitTest extends FunSuite {
   //TODO: - improve coverage
   //TODO: - small unit tests first, try to make as few composites as possible.
 
-  import CircuitImplicits._
+  import com.lprakashv.resiliency.CircuitImplicits._
 
   test("test successes with CircuitImplicits") {
     implicit val sampleCircuit: Circuit[Int] =

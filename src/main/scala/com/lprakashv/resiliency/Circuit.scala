@@ -1,14 +1,7 @@
-package com.lprakashv.circuitbreaker
+package com.lprakashv.resiliency
 
 import java.util.concurrent.atomic.{AtomicInteger, AtomicLong, AtomicReference}
 import java.util.{Date, Timer, TimerTask}
-
-import com.lprakashv.circuitbreaker.Circuit.InvalidEvalCircuitException
-import com.lprakashv.circuitbreaker.CircuitResult.{
-  CircuitFailure,
-  CircuitSuccess
-}
-import com.lprakashv.circuitbreaker.CircuitState._
 
 import scala.concurrent.duration._
 import scala.concurrent.{ExecutionContext, Future}

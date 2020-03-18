@@ -1,9 +1,4 @@
-package com.lprakashv.circuitbreaker
-
-import com.lprakashv.circuitbreaker.CircuitResult.{
-  CircuitFailure,
-  CircuitSuccess
-}
+package com.lprakashv.resiliency
 
 trait CircuitResult[T] extends IterableOnce[T] with Product with Serializable {
   def isFailed: Boolean = this.toOption.isEmpty

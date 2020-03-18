@@ -1,4 +1,4 @@
-package com.lprakashv.circuitbreaker
+package com.lprakashv.resiliency
 
 sealed trait CircuitState
 
