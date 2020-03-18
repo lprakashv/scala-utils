@@ -1,6 +1,5 @@
 [![Build Status](https://travis-ci.org/lprakashv/scala-utils.svg?branch=master&style=flat-square)](https://travis-ci.org/lprakashv/scala-utils?branch=master)
 [![Coverage Status](https://coveralls.io/repos/github/lprakashv/scala-utils/badge.svg?branch=master)](https://coveralls.io/github/lprakashv/scala-utils?branch=master)
-![Scala CI](https://github.com/lprakashv/scala-utils/workflows/Scala%20CI/badge.svg)
 
 # scala-utils
 > My personal collection of Scala utilities and rewrite of an existing data structure or a pattern.
@@ -60,18 +59,7 @@
 
 * #### files
   * FileUtils =>
-  
   * DocumentUtils => 
-    * `underscoreDocumentKeys`
-      - Required arguments: source file path, destination file path, undescore symbol (by default it will be "_") to be put, [optional] indexes where the symbols need to be placed
-      - The source file should have the lines having format: `*key<separator>value*`
-      - The keys of the document with format: "thisIsAKey" will be transformed in the destination file as "this_is_a_key" ("this-is-a-key" if symbol "-" is passed instead of default one)
-    
-    * `camelcaseDocumentKeys`
-      - Required arguments: source file path, destination file path, a start with capital boolean (by default it will be false) to be put, [optional] indexes where the case need to uppered.
-      - The source file should have the lines having format: `*key<separator>value*`
-      - The keys of the document with format: "this_is_a_key" will be transformed in the destination file as "thisIsAKey" ("ThisIsAKey" if start with capital is passed as true).
-
 
 * #### strings
   * StringUtils =>
