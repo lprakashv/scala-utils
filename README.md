@@ -3,18 +3,17 @@
 ![Scala CI](https://github.com/lprakashv/scala-utils/workflows/Scala%20CI/badge.svg)
 
 # scala-utils
-Utilities for Scala
-
-## Common utilities in Scala
 > My personal collection of Scala utilities and rewrite of an existing data structure or a pattern.
 
-Packages and their descriptions:
+##### Packages and their descriptions:
 
 * #### collections
     * MyTrie => A Trie data structure implementation in Scala.
     
-* #### circuitbreaker
+* #### resiliency [take out as library in another module/repo]
   * Circuit => A circuit specification for circuit-breaker design pattern.
+  
+  Usage:
   ```
   val myCircuit = new Circuit[Int](
       "sample-circuit", 
@@ -26,7 +25,11 @@ Packages and their descriptions:
   
   def doThingAndReturnInt: Int = ??? //method to wrap
   
+  def doThingAndReturnIntF: Future[Int] = ??? //async method to wrap
+  
   myCircuit.execute(doThingAndReturnInt)
+  
+  myCircuit.executeAsync(doThingAndReturnIntF)
   
   myCircuit.execute {
       val x = 23
@@ -35,6 +38,21 @@ Packages and their descriptions:
       val y = getAndIntRandomly()
       x / y
   }
+  
+  //others methods like
+  
+  implict val circuit: Circuit[T] = ???
+  
+  (f: => R).execute
+  
+  (ff: => Future[R]).executeAsync
+  
+  //another circuit to be applied on similar blocks
+  val circuit2: Circuit[T] = ???
+  
+  (f: => R)(circuit2).execute
+    
+  (ff: => Future[R])(circuit2).executeAsync
   ```
 
 * #### commons
@@ -57,3 +75,16 @@ Packages and their descriptions:
 
 * #### strings
   * StringUtils =>
+  
+  
+## TODOs:
+- [ ] Added Retry component in resiliency package.
+- [ ] Logging:
+    - [ ] Expedite scala logging libraries.
+        - [ ] Create on if needed on top of Slf4j.
+    - [ ] Improve logging.
+- [ ] Make project modular with sbt modules (especially the resiliency package):
+    - [ ] Added publish support.
+    - [ ] Publish resiliency library.
+- [ ] Add maven and gradle support as well with common build script (refer popular sbt projects also supporting maven and gradle).
+ 
