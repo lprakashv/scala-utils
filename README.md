@@ -6,10 +6,10 @@
 
 ##### Packages and their descriptions:
 
-* #### collections
+* #### collections [todo: take out as library in another module]
     * MyTrie => A Trie data structure implementation in Scala.
     
-* #### resiliency [take out as library in another module/repo]
+* #### resiliency [todo: take out as library in another module]
   * Circuit => A circuit specification for circuit-breaker design pattern.
   
   Usage:
