@@ -1,16 +1,23 @@
 [![Build Status](https://travis-ci.org/lprakashv/scala-utils.svg?branch=master&style=flat-square)](https://travis-ci.org/lprakashv/scala-utils?branch=master)
 [![Coverage Status](https://coveralls.io/repos/github/lprakashv/scala-utils/badge.svg?branch=master)](https://coveralls.io/github/lprakashv/scala-utils?branch=master)
-![Scala CI](https://github.com/lprakashv/scala-utils/workflows/Scala%20CI/badge.svg)
+
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=lprakashv_scala-utils&metric=ncloc)](https://sonarcloud.io/dashboard?id=lprakashv_scala-utils)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=lprakashv_scala-utils&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=lprakashv_scala-utils)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=lprakashv_scala-utils&metric=alert_status)](https://sonarcloud.io/dashboard?id=lprakashv_scala-utils)
+[![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=lprakashv_scala-utils&metric=sqale_index)](https://sonarcloud.io/dashboard?id=lprakashv_scala-utils)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=lprakashv_scala-utils&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=lprakashv_scala-utils)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=lprakashv_scala-utils&metric=code_smells)](https://sonarcloud.io/dashboard?id=lprakashv_scala-utils)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=lprakashv_scala-utils&metric=bugs)](https://sonarcloud.io/dashboard?id=lprakashv_scala-utils)
 
 # scala-utils
 > My personal collection of Scala utilities and rewrite of an existing data structure or a pattern.
 
 ##### Packages and their descriptions:
 
-* #### collections
+* #### collections [todo: take out as library in another module]
     * MyTrie => A Trie data structure implementation in Scala.
     
-* #### resiliency [take out as library in another module/repo]
+* #### resiliency [todo: take out as library in another module]
   * Circuit => A circuit specification for circuit-breaker design pattern.
   
   Usage:
@@ -60,18 +67,7 @@
 
 * #### files
   * FileUtils =>
-  
   * DocumentUtils => 
-    * `underscoreDocumentKeys`
-      - Required arguments: source file path, destination file path, undescore symbol (by default it will be "_") to be put, [optional] indexes where the symbols need to be placed
-      - The source file should have the lines having format: `*key<separator>value*`
-      - The keys of the document with format: "thisIsAKey" will be transformed in the destination file as "this_is_a_key" ("this-is-a-key" if symbol "-" is passed instead of default one)
-    
-    * `camelcaseDocumentKeys`
-      - Required arguments: source file path, destination file path, a start with capital boolean (by default it will be false) to be put, [optional] indexes where the case need to uppered.
-      - The source file should have the lines having format: `*key<separator>value*`
-      - The keys of the document with format: "this_is_a_key" will be transformed in the destination file as "thisIsAKey" ("ThisIsAKey" if start with capital is passed as true).
-
 
 * #### strings
   * StringUtils =>
