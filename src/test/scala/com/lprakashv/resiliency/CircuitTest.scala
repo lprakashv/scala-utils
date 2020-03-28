@@ -18,7 +18,7 @@ class CircuitTest extends FunSuite {
       new Circuit[Int]("sample-circuit", 5, 5.seconds, 1, -1, println)
 
     // to test concurrent executions
-    val resultsF: Future[IndexedSeq[CircuitResult[Int]]] =
+    val resultsF: Future[Seq[CircuitResult[Int]]] =
       Future.sequence((1 to 500).map(_ => (2 + 2).executeAsync))
 
     val results: Seq[CircuitResult[Int]] =

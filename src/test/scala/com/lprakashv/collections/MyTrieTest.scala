@@ -13,7 +13,7 @@ class MyTrieTest extends FunSpec {
       }
 
       it("should have get(\"\") == None") {
-        assert(trie.get("").isEmpty)
+        assert(trie.getValue("").isEmpty)
       }
     }
 
@@ -23,7 +23,7 @@ class MyTrieTest extends FunSpec {
       trie.insert("lalit", 7)
 
       it("should get(\"lalit\") == Some(7)") {
-        assert(trie.get("lalit").contains(7))
+        assert(trie.getValue("lalit").contains(7))
       }
 
       it("should have sortedMap(\"la\").size == 1") {
@@ -83,7 +83,7 @@ class MyTrieTest extends FunSpec {
     }
 
     it("should get(\"assum\") == 7") {
-      assert(trie.get("assum").contains(7))
+      assert(trie.getValue("assum").contains(7))
     }
   }
 }

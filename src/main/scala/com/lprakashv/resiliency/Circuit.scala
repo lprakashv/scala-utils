@@ -31,22 +31,19 @@ class Circuit[R](name: String,
   private val state = new AtomicReference[CircuitState](CircuitState.Closed)
   private val halfOpenConsecutiveFailuresCount = new AtomicInteger(0)
 
-  new Timer(s"$name-circuit-opener").scheduleAtFixedRate(
-    new TimerTask {
-      override def run(): Unit = state.get() match {
-        case Open
-            if (System
-              .currentTimeMillis() - lastOpenTime.get() > timeout.toMillis) =>
-          circuitLogger("Max open timeout reached.")
-          halfOpenCircuit()
-        case _ => ()
-      }
-    },
-    0L,
-    10L
-  )
+  def isTimeOutOver: Boolean =
+    System.currentTimeMillis() - lastOpenTime.get() > timeout.toMillis
 
   def getState: CircuitState = state.get()
+
+  new Timer(s"$name-circuit-opener").scheduleAtFixedRate(new TimerTask {
+    override def run(): Unit = state.get() match {
+      case Open if isTimeOutOver =>
+        circuitLogger("Max open timeout reached.")
+        halfOpenCircuit()
+      case _ => ()
+    }
+  }, 0L, 10L)
 
   def execute(block: => R): CircuitResult[R] = {
     state.get() match {
@@ -204,8 +201,7 @@ class Circuit[R](name: String,
     } else
       throwableOrValue match {
         case Left(exception) if ignoreException(exception) =>
-          openCircuit()
-          execute(block)
+          handleOpen
         case Left(exception) => CircuitFailure(exception)
         case Right(value) =>
           CircuitFailure(InvalidEvalCircuitException(name, value))
@@ -226,8 +222,9 @@ class Circuit[R](name: String,
     } else
       maybeException match {
         case Some(exception) if ignoreException(exception) =>
-          openCircuit()
-          executeAsync(block)
+          atomicCounter.decrementAndGet()
+          closeCircuit()
+          Future.successful(handleOpen)
         case Some(exception) => Future.successful(CircuitFailure(exception))
         case None =>
           Future.successful(
