@@ -1,13 +1,6 @@
-[![Build Status](https://travis-ci.org/lprakashv/scala-utils.svg?branch=master&style=flat-square)](https://travis-ci.org/lprakashv/scala-utils?branch=master)
-[![Coverage Status](https://coveralls.io/repos/github/lprakashv/scala-utils/badge.svg?branch=master)](https://coveralls.io/github/lprakashv/scala-utils?branch=master)
-
-[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=lprakashv_scala-utils&metric=ncloc)](https://sonarcloud.io/dashboard?id=lprakashv_scala-utils)
-[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=lprakashv_scala-utils&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=lprakashv_scala-utils)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=lprakashv_scala-utils&metric=alert_status)](https://sonarcloud.io/dashboard?id=lprakashv_scala-utils)
-[![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=lprakashv_scala-utils&metric=sqale_index)](https://sonarcloud.io/dashboard?id=lprakashv_scala-utils)
-[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=lprakashv_scala-utils&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=lprakashv_scala-utils)
-[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=lprakashv_scala-utils&metric=code_smells)](https://sonarcloud.io/dashboard?id=lprakashv_scala-utils)
-[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=lprakashv_scala-utils&metric=bugs)](https://sonarcloud.io/dashboard?id=lprakashv_scala-utils)
+[![GitHub](https://img.shields.io/github/license/lprakashv/scala-utils?style=flat-square)](LICENSE)
+[![Travis (.com) branch](https://img.shields.io/travis/com/lprakashv/scala-utils/master?style=flat-square)](https://travis-ci.com/lprakashv/scala-utils)
+[![Coveralls github branch](https://img.shields.io/coveralls/github/lprakashv/scala-utils/master?style=flat-square)](https://coveralls.io/github/lprakashv/scala-utils?branch=master)
 
 # scala-utils
 > My personal collection of Scala utilities and rewrite of an existing data structure or a pattern.
