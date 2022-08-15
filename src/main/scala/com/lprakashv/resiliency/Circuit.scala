@@ -197,11 +197,11 @@ class Circuit[R](name: String,
     )
     if (currentFailureCount > maxFailures) {
       openCircuit()
-      execute(block)
+      handleOpen
     } else
       throwableOrValue match {
         case Left(exception) if ignoreException(exception) =>
-          handleOpen
+          execute(block)
         case Left(exception) => CircuitFailure(exception)
         case Right(value) =>
           CircuitFailure(InvalidEvalCircuitException(name, value))
