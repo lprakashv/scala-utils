@@ -23,13 +23,48 @@ jobs:
       with:
         java-version: adopt@1.11
     - name: Run tests and coverage
-      run: sbt clean coverage test coverageAggregate
-    - name: Test Code with Coverage and Reports
-      # You may pin to the exact commit or the version.
-      uses: NikoBergemann/action-sbt-test-report@c72cf468ba85251e39d3c64a4f00918d072bb5bc
-      # uses: NikoBergemann/action-sbt-test-report@v3
+      run: sbt clean coverage test
+    - name: Generate coverage report and get badge
+      run: |
+        # ....
+        # [info] Generating scoverage reports...
+        # [info] Written Cobertura report [/home/runner/work/expression-parser/expression-parser/target/scala-2.13/coverage-report/cobertura.xml]
+        # [info] Written XML coverage report [/home/runner/work/expression-parser/expression-parser/target/scala-2.13/scoverage-report/scoverage.xml]
+        # [info] Written HTML coverage report [/home/runner/work/expression-parser/expression-parser/target/scala-2.13/scoverage-report/index.html]
+        # [info] Statement coverage.: 90.70%
+        # [info] Branch coverage....: 100.00%
+        # [info] Coverage reports completed
+        # [info] Coverage is above minimum [90.70% > 50.0%]
+        # [info] All done. Coverage was [90.70%]
+        # [success] Total time: 1 s, completed Aug 16, 2022, 11:23:18 AM
+
+        COVERAGE_OUTPUT="$(sbt coverageReport)"
+        echo "Coverage report output:"
+        echo "$COVERAGE_OUTPUT"
+
+        SUMMARY="$(echo $COVERAGE_OUTPUT | tail -2 | head -1)"
+        # process.env.COVERAGE = '31.93%';
+        echo "COVERAGE=$(echo $SUMMARY | cut -d " " -f 6 | cut -b 2- | rev | cut -b 2- | rev)" >> $GITHUB_ENV
+
+        # var REF = 'refs/pull/27/merge.json';
+        REF=${{ github.ref }}
+        # console.log('github.ref: ' + REF);
+        echo "github.ref: $REF"
+        # var PATHS = REF.split('/');
+        IFS='/' read -ra PATHS <<< "$REF"
+        # var BRANCH_NAME = PATHS[1] + '_' + PATHS[2];
+        BRANCH_NAME="${PATHS[1]}_${PATHS[2]}"
+        # console.log(BRANCH_NAME); // 'pull_27'
+        echo $BRANCH_NAME
+        # process.env.BRANCH = 'pull_27';
+        echo "BRANCH=$(echo ${BRANCH_NAME})" >> $GITHUB_ENV
+    - name: Create the Badge
+      uses: schneegans/dynamic-badges-action@v1.0.0
       with:
-        # Name of Test Suite(s)
-        what-to-test: "*"
-    - name: Dynamic Badges
-      uses: Schneegans/dynamic-badges-action@v1.4.0
+        auth: ${{ secrets.GIST_SECRET }}
+        gistID: 2f297a650e2c9fea0b3b817691fada74
+        filename: expression-parser__${{ env.BRANCH }}.json
+        label: Test Coverage
+        message: ${{ env.COVERAGE }}
+        color: green
+        namedLogo: scoverage

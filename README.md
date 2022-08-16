@@ -1,4 +1,5 @@
 [![GitHub](https://img.shields.io/github/license/lprakashv/scala-utils?style=flat-square)](LICENSE)
+![Coverage Badge](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/lprakashv/2f297a650e2c9fea0b3b817691fada74/raw/scala-utils__heads_master.json)
 
 # scala-utils
 
