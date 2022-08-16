@@ -39,10 +39,12 @@ jobs:
         # [success] Total time: 1 s, completed Aug 16, 2022, 11:23:18 AM
 
         COVERAGE_OUTPUT="$(sbt coverageReport)"
-        echo "Coverage report output:"
+        echo "COVERAGE_OUTPUT:"
         echo "$COVERAGE_OUTPUT"
 
-        SUMMARY="$(echo $COVERAGE_OUTPUT | tail -2 | head -1)"
+        SUMMARY='$(echo "$COVERAGE_OUTPUT" | tail -2 | head -1)'
+        echo "COVERAGE_OUTPUT:"
+        echo "$COVERAGE_OUTPUT"
         # process.env.COVERAGE = '31.93%';
         echo "COVERAGE=$(echo $SUMMARY | cut -d " " -f 6 | cut -b 2- | rev | cut -b 2- | rev)" >> $GITHUB_ENV
 
