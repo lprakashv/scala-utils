@@ -1,6 +1,4 @@
 [![GitHub](https://img.shields.io/github/license/lprakashv/scala-utils?style=flat-square)](LICENSE)
-[![Travis (.com) branch](https://img.shields.io/travis/com/lprakashv/scala-utils/master?style=flat-square)](https://travis-ci.com/lprakashv/scala-utils)
-[![Coveralls github branch](https://img.shields.io/coveralls/github/lprakashv/scala-utils/master?style=flat-square)](https://coveralls.io/github/lprakashv/scala-utils?branch=master)
 
 # scala-utils
 
