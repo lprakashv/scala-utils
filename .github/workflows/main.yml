@@ -31,3 +31,5 @@ jobs:
       with:
         # Name of Test Suite(s)
         what-to-test: "*"
+    - name: Dynamic Badges
+      uses: Schneegans/dynamic-badges-action@v1.4.0
