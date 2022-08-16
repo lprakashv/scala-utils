@@ -42,11 +42,11 @@ jobs:
         echo "COVERAGE_OUTPUT:"
         echo "$COVERAGE_OUTPUT"
 
-        SUMMARY='$(echo "$COVERAGE_OUTPUT" | tail -2 | head -1)'
+        SUMMARY=$(echo "$COVERAGE_OUTPUT" | tail -2 | head -1)
         echo "SUMMARY:"
         echo "$SUMMARY"
         # process.env.COVERAGE = '31.93%';
-        COVERAGE="$(echo $SUMMARY | cut -d " " -f 6 | cut -b 2- | rev | cut -b 2- | rev)"
+        COVERAGE=$(echo "$SUMMARY" | cut -d " " -f 6 | cut -b 2- | rev | cut -b 2- | rev)
         echo "COVERAGE:"
         echo "$COVERAGE"
         echo "$COVERAGE" >> $GITHUB_ENV
