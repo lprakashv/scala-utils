@@ -43,10 +43,13 @@ jobs:
         echo "$COVERAGE_OUTPUT"
 
         SUMMARY='$(echo "$COVERAGE_OUTPUT" | tail -2 | head -1)'
-        echo "COVERAGE_OUTPUT:"
-        echo "$COVERAGE_OUTPUT"
+        echo "SUMMARY:"
+        echo "$SUMMARY"
         # process.env.COVERAGE = '31.93%';
-        echo "COVERAGE=$(echo $SUMMARY | cut -d " " -f 6 | cut -b 2- | rev | cut -b 2- | rev)" >> $GITHUB_ENV
+        COVERAGE="$(echo $SUMMARY | cut -d " " -f 6 | cut -b 2- | rev | cut -b 2- | rev)"
+        echo "COVERAGE:"
+        echo "$COVERAGE"
+        echo "$COVERAGE" >> $GITHUB_ENV
 
         # var REF = 'refs/pull/27/merge.json';
         REF=${{ github.ref }}
@@ -65,7 +68,7 @@ jobs:
       with:
         auth: ${{ secrets.GIST_SECRET }}
         gistID: 2f297a650e2c9fea0b3b817691fada74
-        filename: expression-parser__${{ env.BRANCH }}.json
+        filename: scala-utils__${{ env.BRANCH }}.json
         label: Test Coverage
         message: ${{ env.COVERAGE }}
         color: green
